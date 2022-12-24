@@ -1,0 +1,63 @@
+// Place all the styles related to the Product controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.items-show {
+  margin-bottom: 5em;
+  .item-detail {
+    margin: 1.5rem auto;
+    display: grid;
+    gap: 1.5em;
+    grid-template-columns: 1fr 3fr;
+
+    @media screen and (max-width: 1000px) {
+      grid-template-columns: 1fr;
+    }
+    div {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      & > p {
+        margin-bottom: auto;
+      }
+    }
+    img {
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+      border-radius: 0.25em;
+      border: 0.1em solid rgba(0, 130, 29, 0.8);
+
+      @media screen and (max-width: 1000px) {
+        width: auto;
+        height: 40vh;
+      }
+
+      @media screen and (max-width: 600px) {
+        width: 100%;
+        height: auto;
+      }
+    }
+    p {
+      text-align: justify;
+    }
+    .quantity,
+    .price {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+      font-weight: 700;
+    }
+  }
+  .total_price-email {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    font-weight: 700;
+  }
+}
