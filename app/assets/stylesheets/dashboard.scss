@@ -1,0 +1,18 @@
+.dashboard-show {
+  margin: 1.5rem auto;
+  .card {
+    text-decoration: none;
+  }
+  .card-header {
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 130, 29, 0.9);
+  }
+  .card-body {
+    text-align: center;
+    color: black;
+    :hover, :visited {
+      color: black;
+    }
+  }
+}
