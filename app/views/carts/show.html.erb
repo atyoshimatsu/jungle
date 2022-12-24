@@ -5,8 +5,9 @@
   </header>
 
   <% if enhanced_cart.length == 0 %>
-    <h2> Your Cart is empty!</h2>
-    <h3>go to <a href="<%= root_path %>">TOP</a></h3>
+    <div class="alert alert-warning" role="alert">
+      Your Cart is empty. Go to the <a href="<%= root_path %>" style="text-decoration: none">TOP</a> page to continue shopping.
+    </div>
   <% end %>
 
   <% if enhanced_cart.length > 0 %>
