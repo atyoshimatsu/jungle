@@ -1,0 +1,16 @@
+<article class="item-detail">
+  <%= image_tag item.image.thumb.url, class: 'main-img' %>
+  <div>
+    <h1><%= item[:name] %></h1>
+    <p><%= item[:description] %></p>
+    <div class="price">
+      <span>price: <%= humanized_money_with_symbol item[:price_cents].to_f/100 %></span>
+    </div>
+    <div class="quantity">
+      <span>quantity: <%= item[:quantity] %></span>
+    </div>
+    <div class="price">
+      <span>subtotal: <%= humanized_money_with_symbol item[:price_cents].to_f*item[:quantity]/100 %></span>
+    </div>
+  </div>
+</article>
