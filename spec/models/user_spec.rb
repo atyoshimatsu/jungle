@@ -12,7 +12,7 @@ RSpec.describe User, type: :model do
     it 'should be invalid with existing email in the DB' do
       @user1 = User.new(first_name: 'test1', last_name: 'test1', email: 'test@example.com', password: 'testtest1', password_confirmation: 'testtest1')
       @user1.save
-      @user2 = User.new(first_name: 'test2', last_name: 'test2', email: 'test@example.com', password: 'testtest2', password_confirmation: 'testtest2')
+      @user2 = User.new(first_name: 'test2', last_name: 'test2', email: 'TEST@example.com', password: 'testtest2', password_confirmation: 'testtest2')
       @user2.save
       expect(@user1).to be_valid
       expect(@user2).to be_invalid
@@ -46,6 +46,32 @@ RSpec.describe User, type: :model do
       expect(@user).to be_invalid
       expect(@user.errors.full_messages).to include("Password is too short (minimum is 8 characters)")
       expect(@user.errors.full_messages).to include("Password confirmation is too short (minimum is 8 characters)")
+    end
+  end
+
+  describe '.authenticate_with_credentials' do
+    it 'should return nil without existing email' do
+      @user = User.new(first_name: 'test', last_name: 'test', email: 'test@example.com', password: 'testtest', password_confirmation: 'testtest')
+      @user.save
+      expect(User.authenticate_with_credentials('sample@example.com', 'testtest')).to equal nil
+    end
+
+    it 'should return nil with ineligible password' do
+      @user = User.new(first_name: 'test', last_name: 'test', email: 'test@example.com', password: 'testtest', password_confirmation: 'testtest')
+      @user.save
+      expect(User.authenticate_with_credentials('test@example.com', 'testtesttest')).to equal nil
+    end
+
+    it 'should return user with email untrimmed space' do
+      @user = User.new(first_name: 'test', last_name: 'test', email: 'test@example.com', password: 'testtest', password_confirmation: 'testtest')
+      @user.save
+      expect(User.authenticate_with_credentials(' test@example.com ', 'testtest')).to eq(@user)
+    end
+
+    it 'should return user with case sensitive email' do
+      @user = User.new(first_name: 'test', last_name: 'test', email: 'test@example.com', password: 'testtest', password_confirmation: 'testtest')
+      @user.save
+      expect(User.authenticate_with_credentials('TEST@EXAMPLE.COM', 'testtest')).to eq(@user)
     end
   end
 end
